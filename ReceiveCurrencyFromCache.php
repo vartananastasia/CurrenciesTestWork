@@ -17,7 +17,7 @@ class ReceiveCurrencyFromCache implements ReceiveCurrency
         $currencies = [];
         $currency = new Currency($currencies);
         if (!$currency->checkCurrenciesExist()) {
-            $currency = ReceiveCurrencyFromDataBase::receive($currency);
+            $currency = ReceiveCurrencyFromDataBase::receive();
         }
         return $currency;
     }

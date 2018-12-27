@@ -19,7 +19,7 @@ class ReceiveCurrencyFromDataBase implements ReceiveCurrency
             $currencyInCache = false;
             $currency->saveCurrencies($currencyInCache);
         }else{
-            $currency = ReceiveCurrencyFromHttp::receive($currency);
+            $currency = ReceiveCurrencyFromHttp::receive();
         }
         return $currency;
     }

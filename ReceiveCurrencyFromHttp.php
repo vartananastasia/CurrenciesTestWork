@@ -13,7 +13,7 @@ class ReceiveCurrencyFromHttp implements ReceiveCurrency
         /**
          * получаем курсы валют по http
          */
-        $currencies = [1=>1];
+        $currencies = [];
         $currency = new Currency($currencies);
         $currencyInCache = false;
         $currencyInDataBase = false;
