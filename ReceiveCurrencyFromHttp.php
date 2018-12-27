@@ -8,11 +8,16 @@
 
 class ReceiveCurrencyFromHttp implements ReceiveCurrency
 {
-    public static function receive(Currency $currency): array
+    public static function receive(): Currency
     {
         /**
          * получаем курсы валют по http
          */
-        return $currency->getCurrencies();
+        $currencies = [1=>1];
+        $currency = new Currency($currencies);
+        $currencyInCache = false;
+        $currencyInDataBase = false;
+        $currency->saveCurrencies($currencyInCache, $currencyInDataBase);
+        return $currency;
     }
 }

@@ -10,23 +10,12 @@ class Currency
 {
     private $currencies = [];
 
-    public function __construct()
+    public function __construct(array $currencies)
     {
-        $currencyInCache = true;
-        $currencyInDataBase = true;
-        $this->currencies = ReceiveCurrencyFromCache::receive($this);
-        if (!self::checkCurrenciesExist()) {
-            $currencyInCache = false;
-            $this->currencies = ReceiveCurrencyFromDataBase::receive($this);
-            if (!self::checkCurrenciesExist()) {
-                $currencyInDataBase = false;
-                $this->currencies = ReceiveCurrencyFromHttp::receive($this);
-            }
-        }
-        self::saveCurrencies($currencyInDataBase, $currencyInCache);
+        $this->currencies = $currencies;
     }
 
-    private function saveCurrencies($currencyInDataBase, $currencyInCache)
+    public function saveCurrencies($currencyInCache, $currencyInDataBase = true)
     {
         if (!$currencyInDataBase) {
             /**
@@ -38,11 +27,6 @@ class Currency
              * пишем курсы валют в кеш
              */
         }
-    }
-
-    public function getCurrencies(): array
-    {
-        return $this->currencies;
     }
 
     public function checkCurrenciesExist(): bool

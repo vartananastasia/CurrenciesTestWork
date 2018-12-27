@@ -6,13 +6,19 @@
  * Time: 10:33
  */
 
+
 class ReceiveCurrencyFromCache implements ReceiveCurrency
 {
-    public static function receive(Currency $currency): array
+    public static function receive(): Currency
     {
         /**
          * получаем курсы валют из кеш
          */
-        return $currency->getCurrencies();
+        $currencies = [];
+        $currency = new Currency($currencies);
+        if (!$currency->checkCurrenciesExist()) {
+            $currency = ReceiveCurrencyFromDataBase::receive($currency);
+        }
+        return $currency;
     }
 }

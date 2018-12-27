@@ -8,11 +8,19 @@
 
 class ReceiveCurrencyFromDataBase implements ReceiveCurrency
 {
-    public static function receive(Currency $currency): array
+    public static function receive(): Currency
     {
         /**
          * получаем курсы валют из базы данных
          */
-        return $currency->getCurrencies();
+        $currencies = [];
+        $currency = new Currency($currencies);
+        if($currency->checkCurrenciesExist()){
+            $currencyInCache = false;
+            $currency->saveCurrencies($currencyInCache);
+        }else{
+            $currency = ReceiveCurrencyFromHttp::receive($currency);
+        }
+        return $currency;
     }
 }

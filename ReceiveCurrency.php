@@ -6,7 +6,8 @@
  * Time: 10:31
  */
 
+
 interface ReceiveCurrency
 {
-    public static function receive(Currency $currency): array;
+    public static function receive(): Currency;
 }
