@@ -1,0 +1,2 @@
+# CurrenciesTestWork
+запускаем ReceiveCurrencyFromCache::receive()
